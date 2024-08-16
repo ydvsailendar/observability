@@ -13,7 +13,7 @@ services:
         - PORT=${PORT}
 
   node_exporter:
-    image: prometheus/node-exporter:v1.8.2
+    image: prom/node-exporter:v1.8.2
     container_name: node_exporter
     restart: unless-stopped
     command:
