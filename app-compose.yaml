@@ -20,6 +20,8 @@ services:
       - "--path.rootfs=/host"
     volumes:
       - "/:/host:ro,rslave"
+    ports:
+      - 9100:9100
 
   caadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.50.0
@@ -33,3 +35,5 @@ services:
       - "/:/rootfs:ro"
     devices:
       - /dev/kmsg
+    ports:
+      - 8080:8080
