@@ -1,7 +1,7 @@
 services:
-  mock-app:
+  mockapi:
     restart: unless-stopped
-    container_name: mock-app
+    container_name: mockapi
     ports:
       - ${PORT}:${PORT}
     env_file:

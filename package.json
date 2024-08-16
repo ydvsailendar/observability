@@ -1,5 +1,5 @@
 {
-  "name": "mock-app",
+  "name": "mockapi",
   "version": "1.0.0",
   "description": "app to get user and its post using mockapi",
   "main": "index.js",
