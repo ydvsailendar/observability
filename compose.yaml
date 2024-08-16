@@ -1,0 +1,35 @@
+services:
+  mock-app:
+    restart: unless-stopped
+    container_name: mock-app
+    ports:
+      - ${PORT}:${PORT}
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - PORT=${PORT}
+
+  node_exporter:
+    image: prometheus/node-exporter:v1.8.2
+    container_name: node_exporter
+    restart: unless-stopped
+    command:
+      - "--path.rootfs=/host"
+    volumes:
+      - "/:/host:ro,rslave"
+
+  caadvisor:
+    image: gcr.io/cadvisor/cadvisor:0.50.0
+    container_name: caadvisor
+    restart: unless-stopped
+    volumes:
+      - "/dev/disk/:/dev/disk:ro"
+      - "/var/lib/docker/:/var/lib/docker:ro"
+      - "/sys:/sys:ro"
+      - "/var/run:/var/run:ro"
+      - "/:/rootfs:ro"
+    devices:
+      - /dev/kmsg
