@@ -22,7 +22,7 @@ services:
       - "/:/host:ro,rslave"
 
   caadvisor:
-    image: gcr.io/cadvisor/cadvisor:0.50.0
+    image: gcr.io/cadvisor/cadvisor:v0.50.0
     container_name: caadvisor
     restart: unless-stopped
     volumes:
