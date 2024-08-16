@@ -12,7 +12,6 @@ services:
       LETSENCRYPT_HOST: ${DOMAIN_NAME}
       LETSENCRYPT_EMAIL: ${ADMIN_EMAIL}
       VIRTUAL_PORT: 3000
-      VIRTUAL_PROTO: https
 
   prometheus:
     image: prom/prometheus:v2.53.2
