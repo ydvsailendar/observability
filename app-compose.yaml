@@ -43,5 +43,6 @@ services:
     volumes:
       - /var/log:/var/log:ro
       - /etc/hostname:/etc/hostname:ro
+      - /var/run/docker.sock:/var/run/docker.sock
       - ./app-promtail.yml:/etc/promtail/promtail.yml
     command: -config.file=/etc/promtail/promtail.yml
