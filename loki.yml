@@ -10,6 +10,7 @@ common:
       store: inmemory
   replication_factor: 1
   path_prefix: /loki
+  zone_awareness_enabled: true
 
 schema_config:
   configs:
@@ -26,5 +27,5 @@ storage_config:
     active_index_directory: /loki/index
     cache_location: /loki/index_cache
   aws:
-    s3: s3://eu-west-2/ydvsailendar-ghost-backup/loki
+    s3: s3://eu-west-2/ydvsailendar-ghost-backup
     s3forcepathstyle: true
