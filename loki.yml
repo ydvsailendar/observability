@@ -10,7 +10,6 @@ common:
       store: inmemory
   replication_factor: 1
   path_prefix: /loki
-  zone_awareness_enabled: true
 
 schema_config:
   configs:
