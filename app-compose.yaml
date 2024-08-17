@@ -33,8 +33,6 @@ services:
       - "/sys:/sys:ro"
       - "/var/run:/var/run:ro"
       - "/:/rootfs:ro"
-    devices:
-      - /dev/kmsg
     ports:
       - 0.0.0.0:8080:8080
 
