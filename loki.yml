@@ -2,34 +2,29 @@ auth_enabled: false
 
 server:
   http_listen_port: 3100
-  log_level: info
 
-distributor:
+common:
   ring:
+    instance_addr: 127.0.0.1
     kvstore:
       store: inmemory
+  replication_factor: 1
+  path_prefix: /loki
 
-ingester:
-  chunk_idle_period: 5m
-  chunk_retain_period: 1h
-  max_chunk_age: 1h
-  max_cache_freshness: 10m
-  chunk_target_size: 1048576
-  flush_deadline: 1m
+schema_config:
+  configs:
+    - from: 2024-08-17
+      store: tsdb
+      object_store: s3
+      schema: v13
+      index:
+        prefix: index_
+        period: 24h
 
 storage_config:
-  boltdb:
-    directory: /loki/index
-
-chunk_store_config:
-  boltdb:
-    directory: /loki/chunks
-
-table_manager:
-  retention_deletes_enabled: true
-  retention_period: 7d
-
-limits_config:
-  ingestion_rate_mb: 5
-  ingestion_rate_mb_per_stream: 1
-  max_chunk_size: 1048576
+  tsdb_shipper:
+    active_index_directory: /loki/index
+    cache_location: /loki/index_cache
+  aws:
+    s3: s3://eu-west-2/ydvsailendar-ghost-backup/loki
+    s3forcepathstyle: true
