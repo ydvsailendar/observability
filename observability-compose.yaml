@@ -78,9 +78,31 @@ services:
     environment:
       DEFAULT_EMAIL: ${ADMIN_EMAIL}
 
+  promtail:
+    image: grafana/promtail:3.1.1
+    container_name: promtail
+    restart: unless-stopped
+    volumes:
+      - /var/log:/var/log:ro
+      - /etc/hostname:/etc/hostname:ro
+      - ./observability-promtail.yml:/etc/promtail/promtail.yml
+    command: -config.file=/etc/promtail/promtail.yml
+
+  loki:
+    image: grafana/loki:latest
+    container_name: loki
+    restart: unless-stopped
+    volumes:
+      - loki_data:/loki
+      - ./loki.yml:/etc/loki/local-config.yaml
+    command: -config.file=/etc/loki/local-config.yaml
+    ports:
+      - "0.0.0.0:3100:3100"
+
 volumes:
   grafana:
   prometheus:
   acme:
   certs:
   html:
+  loki:

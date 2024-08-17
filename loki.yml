@@ -1,0 +1,35 @@
+auth_enabled: false
+
+server:
+  http_listen_port: 3100
+  log_level: info
+
+distributor:
+  ring:
+    kvstore:
+      store: inmemory
+
+ingester:
+  chunk_idle_period: 5m
+  chunk_retain_period: 1h
+  max_chunk_age: 1h
+  max_cache_freshness: 10m
+  chunk_target_size: 1048576
+  flush_deadline: 1m
+
+storage_config:
+  boltdb:
+    directory: /loki/index
+
+chunk_store_config:
+  boltdb:
+    directory: /loki/chunks
+
+table_manager:
+  retention_deletes_enabled: true
+  retention_period: 7d
+
+limits_config:
+  ingestion_rate_mb: 5
+  ingestion_rate_mb_per_stream: 1
+  max_chunk_size: 1048576
