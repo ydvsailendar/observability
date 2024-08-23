@@ -9,28 +9,18 @@ clients:
   - url: http://loki:3100/loki/api/v1/push
 
 scrape_configs:
-  - job_name: system
+  - job_name: observability_host_var_logs
     static_configs:
       - targets:
           - localhost
         labels:
-          job: varlogs
-          __path__: /var/log/*log
+          __path__: /var/log/*.log
 
-  - job_name: container_logs
+  - job_name: observability_container_logs
     docker_sd_configs:
       - host: unix:///var/run/docker.sock
         refresh_interval: 5s
-    relabel_configs:
-      - source_labels: ["__meta_docker_container_name"]
-        regex: "/(.*)"
-        target_label: "container"
 
-  - job_name: journal
+  - job_name: observability_host_journal
     journal:
-      max_age: 12h
-      labels:
-        job: systemd-journal
-    relabel_configs:
-      - source_labels: ["__journal__systemd_unit"]
-        target_label: "unit"
+      path: /var/log/journal
