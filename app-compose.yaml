@@ -1,7 +1,7 @@
 services:
   mockapi:
     restart: unless-stopped
-    container_name: mockapi
+    container_name: app_mockapi
     ports:
       - 0.0.0.0:${PORT}:${PORT}
     env_file:
@@ -14,7 +14,7 @@ services:
 
   node_exporter:
     image: prom/node-exporter:v1.8.2
-    container_name: node_exporter
+    container_name: app_node_exporter
     restart: unless-stopped
     command:
       - "--path.rootfs=/host"
@@ -25,7 +25,7 @@ services:
 
   caadvisor:
     image: gcr.io/cadvisor/cadvisor:v0.50.0
-    container_name: caadvisor
+    container_name: app_caadvisor
     restart: unless-stopped
     volumes:
       - "/dev/disk/:/dev/disk:ro"
@@ -38,7 +38,7 @@ services:
 
   promtail:
     image: grafana/promtail:3.1.1
-    container_name: promtail
+    container_name: app_promtail
     restart: unless-stopped
     volumes:
       - /var/log:/var/log:ro
@@ -46,3 +46,17 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./app-promtail.yml:/etc/promtail/promtail.yml
     command: -config.file=/etc/promtail/promtail.yml
+
+  loki:
+    image: grafana/loki:3.1.1
+    container_name: loki
+    restart: unless-stopped
+    volumes:
+      - loki:/loki
+      - ./loki.yml:/etc/loki/local-config.yaml
+    command: -config.file=/etc/loki/local-config.yaml
+    ports:
+      - "0.0.0.0:3100:3100"
+
+volume:
+  loki:
