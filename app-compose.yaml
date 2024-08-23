@@ -46,17 +46,3 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./app-promtail.yml:/etc/promtail/promtail.yml
     command: -config.file=/etc/promtail/promtail.yml
-
-  loki:
-    image: grafana/loki:3.1.1
-    container_name: loki
-    restart: unless-stopped
-    volumes:
-      - loki:/loki
-      - ./loki.yml:/etc/loki/local-config.yaml
-    command: -config.file=/etc/loki/local-config.yaml
-    ports:
-      - "0.0.0.0:3100:3100"
-
-volumes:
-  loki:
