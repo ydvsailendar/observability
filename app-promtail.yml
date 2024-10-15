@@ -6,7 +6,7 @@ positions:
   filename: /tmp/positions.yaml
 
 clients:
-  - url: http://18.171.134.60:3100/loki/api/v1/push
+  - url: http://35.179.107.142:3100/loki/api/v1/push # loki endpoint of observability server
 
 scrape_configs:
   - job_name: app_host_var_logs

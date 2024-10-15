@@ -13,7 +13,7 @@ services:
       LETSENCRYPT_EMAIL: ${ADMIN_EMAIL}
       VIRTUAL_PORT: 3000
 
-  prometheus:
+  prometheus: # collect and store metrics in a time serices database
     image: prom/prometheus:v2.53.2
     container_name: prometheus
     volumes:
@@ -27,7 +27,7 @@ services:
       LETSENCRYPT_EMAIL: ${ADMIN_EMAIL}
       VIRTUAL_PORT: 9090
 
-  node_exporter:
+  node_exporter: # machine metrics to be scraped by prometheus
     image: prom/node-exporter:v1.8.2
     container_name: node_exporter
     restart: unless-stopped
@@ -38,7 +38,7 @@ services:
     ports:
       - 9100:9100
 
-  caadvisor:
+  caadvisor: # container metrics to be scraped by prometheus
     image: gcr.io/cadvisor/cadvisor:v0.50.0
     container_name: caadvisor
     restart: unless-stopped
@@ -51,7 +51,7 @@ services:
     ports:
       - 8080:8080
 
-  proxy:
+  proxy: # proxy request
     image: nginxproxy/nginx-proxy:1.6
     container_name: proxy
     restart: always
@@ -63,7 +63,7 @@ services:
       - certs:/etc/nginx/certs:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
 
-  letsencrypt:
+  letsencrypt: # perform encryption of domain
     image: nginxproxy/acme-companion:2.4
     container_name: letsencrypt
     restart: always
@@ -76,7 +76,7 @@ services:
     environment:
       DEFAULT_EMAIL: ${ADMIN_EMAIL}
 
-  promtail:
+  promtail: # machine and container logs ships to grafana
     image: grafana/promtail:3.1.1
     container_name: promtail
     restart: unless-stopped
@@ -87,7 +87,7 @@ services:
       - ./observability-promtail.yml:/etc/promtail/promtail.yml
     command: -config.file=/etc/promtail/promtail.yml
 
-  loki:
+  loki: # store and query logs
     image: grafana/loki:3.1.1
     container_name: loki
     restart: unless-stopped

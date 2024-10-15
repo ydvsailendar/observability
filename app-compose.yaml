@@ -12,7 +12,7 @@ services:
       args:
         - PORT=${PORT}
 
-  node_exporter:
+  node_exporter: # machine metrics to be scraped by prometheus
     image: prom/node-exporter:v1.8.2
     container_name: app_node_exporter
     restart: unless-stopped
@@ -23,7 +23,7 @@ services:
     ports:
       - 0.0.0.0:9100:9100
 
-  caadvisor:
+  caadvisor: # container metrics to be scraped by prometheus
     image: gcr.io/cadvisor/cadvisor:v0.50.0
     container_name: app_caadvisor
     restart: unless-stopped
@@ -36,7 +36,7 @@ services:
     ports:
       - 0.0.0.0:8080:8080
 
-  promtail:
+  promtail: # machine and container logs ships to grafana
     image: grafana/promtail:3.1.1
     container_name: app_promtail
     restart: unless-stopped
