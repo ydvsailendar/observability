@@ -1,6 +1,8 @@
 node_modules
 .env.example
-README
+README.md
 Dockerfile
 compose.yaml
 .gitignore
+*.yaml
+*.yml

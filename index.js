@@ -4,7 +4,7 @@ const express = require("express");
 const winston = require("winston");
 
 const app = express();
-const PORT = process.env.PORT | 4747;
+const PORT = process.env.PORT || 4747;
 
 const logger = winston.createLogger({
   level: "info",
@@ -29,9 +29,9 @@ app.get("/users", async (req, res) => {
   const users = await axios.get(`${process.env.MOCK_API}/users`);
   if (users.data.length === 0) {
     logger.warn("There are no users");
-    return res.status(users.status).json(JSON.stringify(users.data));
+    return res.status(users.status).json(users.data);
   }
-  res.status(users.status).json(JSON.stringify(users.data));
+  res.status(users.status).json(users.data);
 });
 
 app.get("/users/:id", async (req, res) => {
@@ -39,7 +39,7 @@ app.get("/users/:id", async (req, res) => {
     const user = await axios.get(
       `${process.env.MOCK_API}/users/${req.params.id}`
     );
-    res.status(user.status).json(JSON.stringify(user.data));
+    res.status(user.status).json(user.data);
   } catch (err) {
     logger.error(`User with id ${req.params.id} not found`);
     res
@@ -52,9 +52,9 @@ app.get("/songs", async (req, res) => {
   const songs = await axios.get(`${process.env.MOCK_API}/songs`);
   if (songs.data.length === 0) {
     logger.warn("There are no songs");
-    return res.status(songs.status).json(JSON.stringify(songs.data));
+    return res.status(songs.status).json(songs.data);
   }
-  res.status(songs.status).json(JSON.stringify(songs.data));
+  res.status(songs.status).json(songs.data);
 });
 
 app.get("/songs/:id", async (req, res) => {
@@ -62,7 +62,7 @@ app.get("/songs/:id", async (req, res) => {
     const song = await axios.get(
       `${process.env.MOCK_API}/songs/${req.params.id}`
     );
-    res.status(song.status).json(JSON.stringify(song.data));
+    res.status(song.status).json(song.data);
   } catch (err) {
     logger.error(`Song with id ${req.params.id} not found`);
     res
