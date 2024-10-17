@@ -82,4 +82,4 @@ app.use((error, req, res, next) => {
   res.status(500).json({ error: "Internal Server Error" });
 });
 
-app.listen(PORT, () => logger.log(`App running on port ${PORT}`));
+app.listen(PORT, () => logger.info(`App running on port ${PORT}`));
