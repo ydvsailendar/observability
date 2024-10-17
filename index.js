@@ -5,17 +5,6 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT | 4747;
 
-app.use((req, res) => {
-  const errMsg = `Route Not Found: ${req.originalUrl}`;
-  console.warn(errMsg);
-  res.status(404).json({ error: errMsg });
-});
-
-app.use((error, req, res, next) => {
-  console.error(`Server Error: ${error.message}`);
-  res.status(500).json({ error: "Internal Server Error" });
-});
-
 app.get("/", (req, res) => {
   res.status(200).send("App Home Page");
 });
@@ -68,6 +57,17 @@ app.get("/songs/:id", async (req, res) => {
       .status(err.toJSON().status)
       .json(`Song with id ${req.params.id} not found`);
   }
+});
+
+app.use((req, res) => {
+  const errMsg = `Route Not Found: ${req.originalUrl}`;
+  console.warn(errMsg);
+  res.status(404).json({ error: errMsg });
+});
+
+app.use((error, req, res, next) => {
+  console.error(`Server Error: ${error.message}`);
+  res.status(500).json({ error: "Internal Server Error" });
 });
 
 app.listen(PORT, () => console.log(`App running on port ${PORT}`));
