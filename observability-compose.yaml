@@ -111,6 +111,7 @@ services:
       VIRTUAL_HOST: ${DOMAIN_JAEGER}
       LETSENCRYPT_HOST: ${DOMAIN_JAEGER}
       LETSENCRYPT_EMAIL: ${ADMIN_EMAIL}
+      VIRTUAL_PORT: 16686
     restart: unless-stopped
 
 volumes:
