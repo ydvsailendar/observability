@@ -11,7 +11,7 @@ const {
 const { PeriodicExportingMetricReader } = require("@opentelemetry/sdk-metrics");
 require("dotenv").config();
 
-const otlpEndpoint = process.env.DOMAIN_JAEGER || "http://localhost:4318";
+const otlpEndpoint = "http://35.179.107.142:4318";
 const sdk = new opentelemetry.NodeSDK({
   traceExporter: new OTLPTraceExporter({
     url: `${otlpEndpoint}/v1/traces`,
