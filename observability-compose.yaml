@@ -98,18 +98,28 @@ services:
     ports:
       - "0.0.0.0:3100:3100"
 
-  jaeger:
+  jaeger-ui:
     image: jaegertracing/all-in-one:1.62.0
     container_name: jaeger
     ports:
       - "16686:16686"
+    environment:
+      VIRTUAL_HOST: ${DOMAIN_JAEGER}
+      LETSENCRYPT_HOST: ${DOMAIN_JAEGER}
+      LETSENCRYPT_EMAIL: ${ADMIN_EMAIL}
+      VIRTUAL_PORT: 16686
+    restart: unless-stopped
+
+  jaeger-tracing:
+    image: jaegertracing/all-in-one:1.62.0
+    container_name: jaeger
+    ports:
       - "4317:4317"
       - "4318:4318"
     environment:
       VIRTUAL_HOST: ${DOMAIN_JAEGER}
       LETSENCRYPT_HOST: ${DOMAIN_JAEGER}
       LETSENCRYPT_EMAIL: ${ADMIN_EMAIL}
-      VIRTUAL_PORT: 16686
     restart: unless-stopped
 
 volumes:
