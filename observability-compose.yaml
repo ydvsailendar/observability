@@ -114,12 +114,12 @@ services:
     image: jaegertracing/all-in-one:1.62.0
     container_name: jaeger-tracing
     ports:
-      - "4317:4317"
-      - "4318:4318"
+      - "4318:4318" # oltp for tracing and metrics
     environment:
       VIRTUAL_HOST: ${DOMAIN_JAEGER}
       LETSENCRYPT_HOST: ${DOMAIN_JAEGER}
       LETSENCRYPT_EMAIL: ${ADMIN_EMAIL}
+      VIRTUAL_PORT: 4318
     restart: unless-stopped
 
 volumes:
