@@ -117,6 +117,9 @@ services:
       PROMETHEUS_QUERY_NORMALIZE_DURATION: true
       PROMETHEUS_QUERY_SUPPORT_SPANMETRICS_CONNECTOR: true
     restart: unless-stopped
+    volumes:
+      - "./jaeger-ui.json:/etc/jaeger/jaeger-ui.json"
+    command: --query.ui-config /etc/jaeger/jaeger-ui.json
 
 volumes:
   grafana:
