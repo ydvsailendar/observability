@@ -20,4 +20,4 @@ scrape_configs:
 
   - job_name: "jaeger"
     static_configs:
-      - targets: ["jaeger:16686"]
+      - targets: ["jaeger:14269"]

@@ -104,6 +104,7 @@ services:
     ports:
       - "16686:16686"
       - "4318:4318" # oltp for tracing and metrics
+      - "14269:14269" # prometheus scrap
     environment:
       VIRTUAL_HOST: ${DOMAIN_JAEGER}
       LETSENCRYPT_HOST: ${DOMAIN_JAEGER}
