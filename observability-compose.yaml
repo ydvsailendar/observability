@@ -109,6 +109,8 @@ services:
       LETSENCRYPT_HOST: ${DOMAIN_JAEGER}
       LETSENCRYPT_EMAIL: ${ADMIN_EMAIL}
       VIRTUAL_PORT: 16686
+      METRICS_STORAGE_TYPE: prometheus
+      PROMETHEUS_SERVER_URL: prometheus:9090
     restart: unless-stopped
 
 volumes:

@@ -28,3 +28,10 @@ const sdk = new opentelemetry.NodeSDK({
   instrumentations: [getNodeAutoInstrumentations()],
 });
 sdk.start();
+
+const getCurrentTraceId = () => {
+  const span = opentelemetry.trace.getSpan(opentelemetry.context.active());
+  return span ? span.spanContext().traceId : null;
+};
+
+module.exports = { getCurrentTraceId };
