@@ -9,6 +9,7 @@ const {
   OTLPMetricExporter,
 } = require("@opentelemetry/exporter-metrics-otlp-proto");
 const { PeriodicExportingMetricReader } = require("@opentelemetry/sdk-metrics");
+const { trace, context } = require("@opentelemetry/api");
 
 const otlpEndpoint = "http://35.179.107.142:4318";
 const sdk = new opentelemetry.NodeSDK({
@@ -29,8 +30,7 @@ const sdk = new opentelemetry.NodeSDK({
 sdk.start();
 
 const getCurrentTraceId = () => {
-  const span = opentelemetry.trace.getSpan(opentelemetry.context.active());
+  const span = trace.getSpan(context.active());
   return span ? span.spanContext().traceId : null;
 };
-
 module.exports = { getCurrentTraceId };
