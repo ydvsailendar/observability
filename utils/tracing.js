@@ -9,7 +9,6 @@ const {
   OTLPMetricExporter,
 } = require("@opentelemetry/exporter-metrics-otlp-proto");
 const { PeriodicExportingMetricReader } = require("@opentelemetry/sdk-metrics");
-require("dotenv").config();
 
 const otlpEndpoint = "http://35.179.107.142:4318";
 const sdk = new opentelemetry.NodeSDK({

@@ -1,42 +1,10 @@
 require("dotenv").config();
 const axios = require("axios");
 const express = require("express");
-const winston = require("winston");
-
-const { getCurrentTraceId } = require("./utils/tracing");
+const { warn, info, error } = require("./utils/logging");
 
 const app = express();
 const PORT = process.env.PORT || 4747;
-
-const logger = winston.createLogger({
-  level: "info",
-  format: winston.format.combine(
-    winston.format.timestamp(),
-    winston.format.printf(({ level, message, timestamp, traceId }) => {
-      return `${timestamp} [${level.toUpperCase()}] [Trace ID: ${
-        traceId || "N/A"
-      }]: ${message}`;
-    })
-  ),
-  transports: [new winston.transports.Console()],
-});
-
-const logWithTraceId = (level, message) => {
-  const traceId = getCurrentTraceId();
-  logger.log({ level, message, traceId });
-};
-
-const warn = (message) => {
-  logWithTraceId("warn", message);
-};
-
-const info = (message) => {
-  logWithTraceId("info", message);
-};
-
-const error = (message) => {
-  logWithTraceId("error", message);
-};
 
 app.get("/", (req, res) => {
   res.status(200).send("App Home Page");
