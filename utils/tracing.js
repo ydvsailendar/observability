@@ -24,6 +24,7 @@ const sdk = new opentelemetry.NodeSDK({
       headers: {},
       concurrencyLimit: 1,
     }),
+    exportIntervalMillis: 10000,
   }),
   instrumentations: [getNodeAutoInstrumentations()],
 });
