@@ -17,3 +17,7 @@ scrape_configs:
   - job_name: "mockapi_caadvisor"
     static_configs:
       - targets: ["18.171.205.203:8080"]
+
+  - job_name: "jaeger"
+    static_configs:
+      - targets: ["jaeger:16686"]

@@ -110,6 +110,7 @@ services:
       LETSENCRYPT_EMAIL: ${ADMIN_EMAIL}
       VIRTUAL_PORT: 16686
       METRICS_STORAGE_TYPE: prometheus
+      PROMETHEUS_SERVER_URL: http://prometheus:9090
     restart: unless-stopped
 
 volumes:
@@ -119,3 +120,7 @@ volumes:
   certs:
   html:
   loki:
+
+networks:
+  default:
+    driver: bridge
