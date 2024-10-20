@@ -7,11 +7,10 @@ const {
 } = require("@opentelemetry/exporter-trace-otlp-proto");
 const { trace, context } = require("@opentelemetry/api");
 
-const otlpEndpoint = "http://35.179.107.142:4318";
 const sdk = new opentelemetry.NodeSDK({
   serviceName: "mockapi",
   traceExporter: new OTLPTraceExporter({
-    url: `${otlpEndpoint}/v1/traces`,
+    url: "http://jaeger:4318/v1/traces",
     headers: {},
   }),
   instrumentations: [getNodeAutoInstrumentations()],
