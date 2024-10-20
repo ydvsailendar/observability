@@ -48,6 +48,7 @@ const {
 } = require("@opentelemetry/sdk-metrics");
 
 const sdk = new NodeSDK({
+  serviceName: "mock-api",
   traceExporter: new ConsoleSpanExporter(),
   metricReader: new PeriodicExportingMetricReader({
     exporter: new ConsoleMetricExporter(),
