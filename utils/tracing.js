@@ -36,9 +36,8 @@
 // };
 // module.exports = { getCurrentTraceId };
 
-/*instrumentation.js*/
-// Require dependencies
 const { NodeSDK } = require("@opentelemetry/sdk-node");
+const { trace, context } = require("@opentelemetry/api");
 const { ConsoleSpanExporter } = require("@opentelemetry/sdk-trace-node");
 const {
   getNodeAutoInstrumentations,
