@@ -5,7 +5,6 @@ const {
 const {
   OTLPTraceExporter,
 } = require("@opentelemetry/exporter-trace-otlp-proto");
-const { PeriodicExportingMetricReader } = require("@opentelemetry/sdk-metrics");
 const { trace, context } = require("@opentelemetry/api");
 
 const otlpEndpoint = "http://35.179.107.142:4318";
