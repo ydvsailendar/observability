@@ -18,6 +18,6 @@ scrape_configs:
     static_configs:
       - targets: ["18.171.205.203:8080"]
 
-  - job_name: "jaeger"
+  - job_name: "observability_jaeger"
     static_configs:
-      - targets: ["jaeger:14269"]
+      - targets: ["jaeger:16686"]

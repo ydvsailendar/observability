@@ -103,23 +103,12 @@ services:
     container_name: jaeger
     ports:
       - "16686:16686"
-      - "4318:4318" # oltp for tracing and metrics
-      - "14269:14269" # prometheus scrap
     environment:
       VIRTUAL_HOST: ${DOMAIN_JAEGER}
       LETSENCRYPT_HOST: ${DOMAIN_JAEGER}
       LETSENCRYPT_EMAIL: ${ADMIN_EMAIL}
       VIRTUAL_PORT: 16686
-      METRICS_BACKEND: prometheus
-      METRICS_STORAGE_TYPE: prometheus
-      PROMETHEUS_SERVER_URL: http://prometheus:9090
-      PROMETHEUS_QUERY_NORMALIZE_CALLS: true
-      PROMETHEUS_QUERY_NORMALIZE_DURATION: true
-      PROMETHEUS_QUERY_SUPPORT_SPANMETRICS_CONNECTOR: true
     restart: unless-stopped
-    volumes:
-      - "./jaeger-ui.json:/etc/jaeger/jaeger-ui.json"
-    command: --query.ui-config /etc/jaeger/jaeger-ui.json
 
 volumes:
   grafana:
