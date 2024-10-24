@@ -102,6 +102,7 @@ services:
     image: jaegertracing/all-in-one:1.62.0
     container_name: jaeger
     ports:
+      - "4318:4318"
       - "16686:16686"
     environment:
       VIRTUAL_HOST: ${DOMAIN_JAEGER}
