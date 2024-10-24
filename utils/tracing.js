@@ -10,7 +10,7 @@ const { trace, context } = require("@opentelemetry/api");
 const sdk = new opentelemetry.NodeSDK({
   serviceName: "mockapi",
   traceExporter: new OTLPTraceExporter({
-    url: "http://jaeger:4318/v1/traces",
+    url: "http://35.179.107.142:4318/v1/traces",
     headers: {},
   }),
   instrumentations: [getNodeAutoInstrumentations()],
